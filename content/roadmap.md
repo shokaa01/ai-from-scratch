@@ -1,8 +1,7 @@
 # AI from scratch — beginner roadmap (new series)
 
 Forty tiny posts for full-stack JS/TS folks who ship apps and want AI to stop feeling like magic.
-Archive posts (`content/posts/archive/`) already covered neural-net basics — we'll nod at them in Module 4.
-New daily posts live in `content/posts/series/` and are the only ones that count toward progress (X / 40).
+Daily posts live in `content/posts/series/` and count toward progress (X / 40).
 
 Voice: casual, medium-length, worth finishing. No textbook walls.
 
@@ -33,13 +32,13 @@ Voice: casual, medium-length, worth finishing. No textbook walls.
 17. Calibration: when "80% sure" should actually mean 80%
 18. Cross-validation without sounding like a stats major
 
-## Module 4 — Neural nets (days 19–26) — can reference archive
+## Module 4 — Neural nets (days 19–26)
 
-19. Neural nets again, but now you have the vocabulary (→ archive 001–002)
-20. Layers & activations: why "deep" isn't marketing (→ archive 003)
-21. Forward pass + loss: the two-step dance (→ archive 004–005)
-22. Gradient descent & backprop without the tears (→ archive 006–007)
-23. One training loop to rule them all (→ archive 008)
+19. Neural nets again, but now you have the vocabulary
+20. Layers & activations: why "deep" isn't marketing
+21. Forward pass + loss: the two-step dance
+22. Gradient descent & backprop without the tears
+23. One training loop to rule them all
 24. Stopping your net from memorizing the homework
 25. CNNs: how a model "sees" without eyeballs
 26. Embeddings: turning words into coordinates
@@ -67,4 +66,3 @@ Voice: casual, medium-length, worth finishing. No textbook walls.
 ---
 
 **Progress rule:** only `content/posts/series/` increments the home counter toward 40.
-Archive stays visible; it doesn't count.

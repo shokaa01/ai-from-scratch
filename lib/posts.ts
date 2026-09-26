@@ -5,7 +5,7 @@ import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 
-export type SeriesId = "archive" | "series";
+export type SeriesId = "series";
 
 export type PostMeta = {
   slug: string;
@@ -26,7 +26,6 @@ export type Post = PostMeta & {
 
 export const NEW_SERIES_TOTAL = 40;
 
-const ARCHIVE_DIR = path.join(process.cwd(), "content", "posts", "archive");
 const SERIES_DIR = path.join(process.cwd(), "content", "posts", "series");
 
 function estimateReadingMinutes(text: string): number {
@@ -64,26 +63,15 @@ function listDir(dir: string, series: SeriesId): PostMeta[] {
 }
 
 export function getAllPosts(): PostMeta[] {
-  const posts = [
-    ...listDir(ARCHIVE_DIR, "archive"),
-    ...listDir(SERIES_DIR, "series"),
-  ];
+  const posts = listDir(SERIES_DIR, "series");
   return posts.sort((a, b) => {
     if (a.date === b.date) return b.number - a.number;
     return a.date < b.date ? 1 : -1;
   });
 }
 
-export function getArchivePosts(): PostMeta[] {
-  return getAllPosts()
-    .filter((p) => p.series === "archive")
-    .sort((a, b) => a.number - b.number);
-}
-
 export function getSeriesPosts(): PostMeta[] {
-  return getAllPosts()
-    .filter((p) => p.series === "series")
-    .sort((a, b) => a.number - b.number);
+  return getAllPosts().sort((a, b) => a.number - b.number);
 }
 
 export function getProgress(): { completed: number; total: number } {
@@ -94,33 +82,28 @@ export function getProgress(): { completed: number; total: number } {
 }
 
 export function getPostBySlug(slug: string): Post | null {
-  for (const [dir, series] of [
-    [ARCHIVE_DIR, "archive"],
-    [SERIES_DIR, "series"],
-  ] as const) {
-    for (const ext of [".md", ".mdx"] as const) {
-      const filePath = path.join(dir, `${slug}${ext}`);
-      if (!fs.existsSync(/*turbopackIgnore: true*/ filePath)) continue;
-      const raw = fs.readFileSync(/*turbopackIgnore: true*/ filePath, "utf8");
-      const { data, content } = matter(raw);
-      const processed = remark()
-        .use(remarkGfm)
-        .use(remarkHtml)
-        .processSync(content);
-      return {
-        slug,
-        number: Number(data.number) || 0,
-        title: String(data.title || slug),
-        date: String(data.date || ""),
-        summary: String(data.summary || ""),
-        tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-        cover: data.cover ? String(data.cover) : undefined,
-        series: (data.series as SeriesId) || series,
-        readingMinutes: estimateReadingMinutes(content),
-        content,
-        contentHtml: String(processed),
-      };
-    }
+  for (const ext of [".md", ".mdx"] as const) {
+    const filePath = path.join(SERIES_DIR, `${slug}${ext}`);
+    if (!fs.existsSync(/*turbopackIgnore: true*/ filePath)) continue;
+    const raw = fs.readFileSync(/*turbopackIgnore: true*/ filePath, "utf8");
+    const { data, content } = matter(raw);
+    const processed = remark()
+      .use(remarkGfm)
+      .use(remarkHtml)
+      .processSync(content);
+    return {
+      slug,
+      number: Number(data.number) || 0,
+      title: String(data.title || slug),
+      date: String(data.date || ""),
+      summary: String(data.summary || ""),
+      tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+      cover: data.cover ? String(data.cover) : undefined,
+      series: "series",
+      readingMinutes: estimateReadingMinutes(content),
+      content,
+      contentHtml: String(processed),
+    };
   }
   return null;
 }

@@ -33,7 +33,6 @@ export default async function PostPage({ params }: Props) {
   const tagsLine = [
     post.readingMinutes ? `${post.readingMinutes} min read` : null,
     post.tags.join(" · ") || null,
-    post.series === "archive" ? "archive" : null,
   ]
     .filter(Boolean)
     .join(" · ");

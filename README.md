@@ -4,7 +4,7 @@ One tiny post a day. Learning AI/ML as a full-stack JS/TS builder.
 
 **Voice:** casual, medium-size posts that are actually interesting — not textbook walls of text.
 
-Live (previous deploy): https://ai-from-scratch-phi.vercel.app  
+Live: https://ai-from-scratch-three.vercel.app  
 Repo: https://github.com/shokaa01/ai-from-scratch
 
 ## Stack
@@ -17,18 +17,17 @@ Repo: https://github.com/shokaa01/ai-from-scratch
 
 ```
 content/
-  roadmap.md                 # new 40-day curriculum
+  roadmap.md                 # 40-day curriculum
   posts/
-    archive/                 # original 8 neural-net posts (do not count toward progress)
-    series/                  # new curriculum posts (progress = count / 40)
+    series/                  # daily posts (progress = count / 40)
 public/covers/               # cover images
 ```
 
-Frontmatter fields: `number`, `title`, `date`, `summary`, `tags`, `cover` (optional), `series` (`archive` | `series`).
+Frontmatter fields: `number`, `title`, `date`, `summary`, `tags`, `cover` (optional), `series` (`series`).
 
 Routes:
 
-- `/` — progress for the **new** series + lists
+- `/` — progress + post list
 - `/posts/[slug]` — post page
 
 ## Local setup
@@ -51,7 +50,7 @@ npm start
 2. Create `content/posts/series/001-your-slug.md` (pad numbers)
 3. Optional cover at `public/covers/001-your-slug.jpg`
 4. Keep it casual, medium-length, worth finishing
-5. Commit & push — Vercel will rebuild if the project is linked
+5. Commit & push — Vercel rebuilds from `main`
 
 ## Vercel notes
 
@@ -59,9 +58,5 @@ npm start
 - Build command: `npm run build` (default)
 - Output: default Next.js
 - Root directory: repo root
-- No env vars required for the static blog
-- Link this GitHub repo (`shokaa01/ai-from-scratch`, branch `main`) in the Vercel dashboard — do not reconfigure from scripts here
-
-## License / credit
-
-© 2026 Sarthak
+- No env vars required
+- Linked GitHub repo: `shokaa01/ai-from-scratch` (branch `main`)

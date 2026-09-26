@@ -13,7 +13,7 @@ export function PostList({ posts }: { posts: PostMeta[] }) {
   return (
     <ul className="divide-y divide-rule">
       {posts.map((post) => (
-        <li key={`${post.series}-${post.slug}`}>
+        <li key={post.slug}>
           <Link
             href={`/posts/${post.slug}`}
             className="block py-5 group hover:opacity-90 transition-opacity"
@@ -22,12 +22,6 @@ export function PostList({ posts }: { posts: PostMeta[] }) {
               #{padNumber(post.number)}
               <span className="mx-1.5">·</span>
               {formatPostDate(post.date)}
-              {post.series === "archive" ? (
-                <>
-                  <span className="mx-1.5">·</span>
-                  <span>archive</span>
-                </>
-              ) : null}
             </p>
             <h3 className="font-serif text-xl md:text-2xl font-bold text-ink tracking-tight group-hover:underline decoration-1 underline-offset-4">
               {post.title}
