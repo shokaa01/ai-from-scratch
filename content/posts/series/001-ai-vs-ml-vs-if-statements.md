@@ -2,9 +2,9 @@
 number: 1
 title: "AI vs ML vs I just wrote an if statement"
 date: 2026-09-26
-summary: "The one mental model that stops AI from feeling like magic — for people who already ship apps."
-tags: ["fundamentals", "mental-model", "beginner"]
-cover: "/covers/001-ai-vs-ml-vs-if-statements.svg"
+summary: "The 5-minute mental model that stops AI from feeling like magic — for people who already ship apps."
+tags: ["fundamentals", "mental-model"]
+cover: "/covers/001-ai-vs-ml-vs-if-statements.jpg"
 series: series
 ---
 
@@ -14,37 +14,37 @@ They're not. Here's the clean split.
 
 ## The if-statement world (you live here)
 
-```ts
-function shouldBlockSignup(email: string) {
+```js
+function shouldBlockSignup(email) {
   if (email.endsWith(".ru") && email.includes("promo")) return true;
   if (DISPOSABLE_DOMAINS.has(domainOf(email))) return true;
   return false;
 }
 ```
 
-**You** invent the rules. The computer is a very obedient intern. Same input → same output, forever. Bugs are your fault. Wins are also your fault. This is traditional programming, and it's still the right tool for most product logic (billing, auth, permissions, "if plan === pro").
+**You** invent the rules. The computer is a very obedient intern. Same input → same output, forever. Bugs are your fault. Wins are also your fault. This is still the right tool for most product logic (billing, auth, permissions, "if plan === pro").
 
 ## Machine learning: you stop writing the rules
 
 ML flips the job:
 
-- You collect **examples** (this email was spam / not spam).
-- You pick an **algorithm** that looks for patterns.
+- You collect examples (this email was spam / not spam).
+- You pick an algorithm that looks for patterns.
 - The computer writes a messy function that *usually* gets it right on new emails.
 
-You didn't write `if (subject.includes("FREE!!!"))`. You showed it 50,000 labeled emails and said "figure out what spam *looks like*." That's the whole joke of ML: **rules out, examples in.**
+You didn't write `if (subject.includes("FREE!!!"))`. You showed it 50,000 labeled emails and said "figure out what spam looks like." That's the whole joke of ML: **rules out, examples in.**
 
 If traditional code is a recipe you hand the kitchen, ML is tasting a thousand dishes and reverse-engineering the recipe. Sometimes the recipe is weird. Sometimes it works better than anything you'd have typed.
 
 ## So where does "AI" fit?
 
-**AI** is the big umbrella: "make a machine do something that looks smart."
+AI is the big umbrella: "make a machine do something that looks smart."
 
-**ML** is one way to build AI — the popular way in 2026. ChatGPT, recommenders, fraud models, face unlock: mostly ML under the hood.
+ML is one way to build AI — the popular way in 2026. ChatGPT, recommenders, fraud models, face unlock: mostly ML under the hood.
 
-There are other AI flavors that *aren't* classic ML (old-school rule engines, search algorithms, planners). When Twitter says "AI feature," they almost always mean ML, often a neural net, often an LLM. For builders, that shorthand is fine — just know the nesting:
+When a product says "AI feature," they almost always mean ML. For builders, that shorthand is fine — just know the nesting:
 
-> **AI ⊃ ML ⊃ deep learning ⊃ LLMs**
+> AI ⊃ ML ⊃ deep learning ⊃ LLMs
 
 Like: frontend ⊃ React ⊃ Next.js ⊃ App Router. Same idea, different zoom levels.
 
@@ -52,20 +52,11 @@ Like: frontend ⊃ React ⊃ Next.js ⊃ App Router. Same idea, different zoom l
 
 Ask one question before you reach for ML:
 
-**Can a senior engineer write the rules in a week, and will those rules stay true next month?**
+Can a senior engineer write the rules in a week, and will those rules stay true next month?
 
-- Yes → write the `if`s. Ship. Sleep.
-- No, because the pattern is fuzzy / huge / shifting (fraud, ranking, "does this screenshot look broken?", "summarize this ticket") → that's ML territory.
+- **Yes** → write the `if`s. Ship. Sleep.
+- **No**, because the pattern is fuzzy / huge / shifting → that's ML territory.
 
 You're not behind for still writing if-statements. You're behind if you try to train a model for "is this user on the Pro plan?"
 
-## What you'll learn next
-
-Tomorrow: the three nouns that show up in every ML conversation — **data, features, labels** — mapped to things you already store in Postgres.
-
-## Dig deeper
-
-- [Google Cloud — AI vs machine learning](https://cloud.google.com/learn/artificial-intelligence-vs-machine-learning)
-- [IBM — What is machine learning?](https://www.ibm.com/think/topics/machine-learning)
-- [MIT Sloan — Machine learning, explained](https://mitsloan.mit.edu/ideas-made-to-matter/machine-learning-explained)
-- [GeeksforGeeks — Traditional programming vs ML](https://www.geeksforgeeks.org/machine-learning/traditional-programming-vs-machine-learning/)
+Tomorrow: the three nouns that show up in every ML conversation — data, features, labels — mapped to things you already store in Postgres.
