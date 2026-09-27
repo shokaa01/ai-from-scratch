@@ -3,7 +3,7 @@ import { getProgress, getSeriesPosts } from "@/lib/posts";
 
 export default function HomePage() {
   const progress = getProgress();
-  const series = getSeriesPosts().slice().reverse();
+  const series = getSeriesPosts();
 
   return (
     <div className="mx-auto max-w-prose px-4 sm:px-6 py-12 md:py-16">
